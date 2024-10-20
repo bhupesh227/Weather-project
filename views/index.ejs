@@ -1,0 +1,69 @@
+<%- include('partials/header.ejs') %>
+
+<div class="geo">
+    <button id="geoSearch">Get My Location</button>
+</div>
+
+<div class="weatherInfo">
+    <% if (weath && weath.data && weath.data.length > 0) { %>
+        <div class="weather-results">
+            <div class="topBlock">
+                <h1>Weather in <%= weath.data[0].city_name %></h1>
+                <h2><%= weath.data[0].app_temp %> °C</h2>
+                <h3><%= weath.data[0].timezone %></h3>
+            </div>    
+            <div class="leftBlock">
+                <p><strong>Weather: </strong> <%= weath.data[0].weather.description %></p>
+                <img src="../images/<%=weath.data[0].weather.icon  %>.png" alt="image">
+                <p>
+                    <strong>lat:</strong> <%= weath.data[0].lat %>
+                    <strong>lon:</strong><%= weath.data[0].lon %>
+                </p>
+            </div> 
+            <div class="rightBlock">
+                <p><strong>Humidity: </strong> <%= weath.data[0].rh %>%</p>
+                <p><strong>Wind Speed: </strong><%= weath.data[0].wind_spd %> m/s</p>
+                <p><strong>Air Quality: </strong><%= weath.data[0].aqi %></p>
+                <p><strong>Solar Radiation: </strong><%= weath.data[0].solar_rad %></p>
+                <p><strong>Visibility: </strong><%= weath.data[0].vis %></p>
+                <p><strong>Elevation Angle: </strong><%= weath.data[0].elev_angle %></p>
+            </div>  
+                
+        </div>
+    <% } else if (error) { %>
+        <p><%= error %></p>
+    <% } %>
+</div>
+ 
+<script>
+    document.getElementById('geoSearch').addEventListener('click', () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const { latitude, longitude } = position.coords;
+                fetch(`/geo?lat=${latitude}&lon=${longitude}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert(data.error);
+                        } else {
+                            // Redirect to home page with city name
+                            window.location.href = `/?city=${data.data[0].city_name}`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+            }, () => {
+                alert('Unable to retrieve your location');
+            });
+        } else {
+            alert('Geolocation is not supported by this browser.');
+        }
+    });
+    //not able to right click0.
+    
+    document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
+</script>
+<%- include('partials/footer.ejs') %>
