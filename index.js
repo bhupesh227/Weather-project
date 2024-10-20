@@ -19,8 +19,8 @@ app.get("/", async (req, res) => {
     let error = null;
 
     if (city) {
-        const apiKey = process.env.API_KEY;
-        const apiUrl = `https://api.weatherbit.io/v2.0/current?key=${apiKey}&city=${city}`;
+        const API_KEY= process.env.API_KEY;
+        const apiUrl = `https://api.weatherbit.io/v2.0/current?key=${API_KEY}&city=${city}`;
         try {
             const response = await axios.get(apiUrl);
             weath = response.data;
@@ -44,8 +44,8 @@ app.post("/search", async (req, res) => {
 
 app.get("/geo", async (req, res) => {
     const { lat, lon } = req.query;
-    const apiKey = process.env.API_KEY;
-    const apiUrl = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${apiKey}`;
+    const API_KEY= process.env.API_KEY;
+    const apiUrl = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${API_KEY}`;
     
     try {
         const response = await axios.get(apiUrl);
