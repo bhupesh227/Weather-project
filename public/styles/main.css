@@ -21,7 +21,7 @@ body{
 }
 .logo p{
     font-size: larger;
-    margin-left: 10px;
+    margin-left: 20px;
     color: white;
 }
 .nav ul{
@@ -161,6 +161,7 @@ footer{
 @media(max-width:500px){
     .search_form input{
         width: 60px;
+        margin-right: 0px;
     }
     footer{
         height: 4rem;
@@ -184,8 +185,18 @@ footer{
     }
     .leftBlock{
         grid-area: 3/1/5/4;
+        font-size: small;
+        margin-left: 10px;
+    }
+    .leftBlock p{
+        margin: 6px 5px 6px 5px;
     }
     .rightBlock{
         grid-area: 3/5/5/8;
+        font-size: small;
+        margin-right: 15px;
+    }
+    .topBlock{
+        font-size:small;
     }
 }
