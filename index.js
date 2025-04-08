@@ -17,7 +17,7 @@ app.get("/", async (req, res) => {
     const city = req.query.city;
     let weath = null;
     let error = null;
-    let backgroundImage = 'default.jpg'; 
+    let backgroundImage = 'tree-desert-white-clouds-daytime.jpg'; 
     if (city) {
         const API_KEY= process.env.API_KEY;
         const apiUrl = `https://api.weatherbit.io/v2.0/current?key=${API_KEY}&city=${city}`;
@@ -50,7 +50,7 @@ app.get("/", async (req, res) => {
                      backgroundImage = 'few_clouds.jpg'; // Few clouds
                      break;
                  default:
-                     backgroundImage = 'default.jpg'; // Fallback
+                     backgroundImage = 'tree-desert-white-clouds-daytime.jpg'; // Fallback
              }
         } catch (error) {
             console.error("Failed to fetch weather data", error);

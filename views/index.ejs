@@ -7,13 +7,19 @@
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body style="background-image: url('../images/<%= backgroundImage %>'); background-size: cover; background-position: center;">
+<body style="background-image: url('../images/<%= backgroundImage %>'); background-size: cover; ">
 <%- include('partials/header.ejs') %>
 
-<div class="geo">
-    <button id="geoSearch">Get My Location</button>
-</div>
-
+<% if (!weath && !error) { %>
+    <div class="welcome">
+        <h1>Welcome to the Weather App</h1>
+        <h2>Get the latest weather updates for your city</h2>
+        <div class="geo">
+            <button id="geoSearch">Get My Location</button>
+        </div>
+    </div>
+    
+<% } %>
 <div class="weatherInfo">
     <% if (weath && weath.data && weath.data.length > 0) { %>
         <div class="weather-results">
@@ -24,7 +30,7 @@
             </div>    
             <div class="leftBlock">
                 <p><strong>Weather: </strong> <%= weath.data[0].weather.description %></p>
-                <img src="../images/<%=weath.data[0].weather.icon  %>.png" alt="image">
+                <img src="../images/<%=weath.data[0].weather.icon  %>.png" alt="image" >
                 <p>
                     <strong>lat: </strong> <%= weath.data[0].lat %> 
                     <strong>lon: </strong><%= weath.data[0].lon %>
